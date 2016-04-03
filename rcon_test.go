@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"net"
 	"testing"
+	"time"
 )
 
 func startTestServer(fn func(net.Conn, *bytes.Buffer)) (string, error) {
@@ -142,7 +143,7 @@ func TestMultipacket(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	str, _, err := rc.Read()
+	str, _, err := rc.Read(10 * time.Second)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -150,7 +151,7 @@ func TestMultipacket(t *testing.T) {
 		t.Fatal("response length not correct")
 	}
 
-	str, _, err = rc.Read()
+	str, _, err = rc.Read(10 * time.Second)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -158,7 +159,7 @@ func TestMultipacket(t *testing.T) {
 		t.Fatal("response length not correct")
 	}
 
-	str, _, err = rc.Read()
+	str, _, err = rc.Read(10 * time.Second)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -166,7 +167,7 @@ func TestMultipacket(t *testing.T) {
 		t.Fatal("response length not correct")
 	}
 
-	str, _, err = rc.Read()
+	str, _, err = rc.Read(10 * time.Second)
 	if err != nil {
 		t.Fatal(err)
 	}

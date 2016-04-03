@@ -92,10 +92,10 @@ func (r *RemoteConsole) Write(cmd string) (requestId int, err error) {
 	return r.writeCmd(cmdExecCommand, cmd)
 }
 
-func (r *RemoteConsole) Read() (response string, requestId int, err error) {
+func (r *RemoteConsole) Read(timeout time.Duration) (response string, requestId int, err error) {
 	var respType int
 	var respBytes []byte
-	respType, requestId, respBytes, err = r.readResponse(2 * time.Minute)
+	respType, requestId, respBytes, err = r.readResponse(timeout)
 	if err != nil || respType != respResponse {
 		response = ""
 		requestId = 0
